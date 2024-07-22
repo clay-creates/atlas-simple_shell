@@ -17,6 +17,8 @@ char **split_line(char *line)
 	if (!tokens)
 	{
 		fprintf(stderr, "Allocation Error\n");
+		free(tokens);
+		free(token);
 		free(line);
 		exit(EXIT_FAILURE);
 	}
@@ -34,6 +36,8 @@ char **split_line(char *line)
 			if (!tokens)
 			{
 				fprintf(stderr, "Allocation Error");
+				free(tokens);
+				free(token);
 				free(line);
 				exit(EXIT_FAILURE);
 			}
