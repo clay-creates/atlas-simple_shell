@@ -9,13 +9,15 @@
 
 char **split_line(char *line)
 {
-	int bufsize = 64, position = 0;
+	int bufsize = 64;
+	int position = 0;
 	char **tokens = malloc(bufsize * sizeof(char *));
 	char *token;
 
 	if (!tokens)
 	{
 		fprintf(stderr, "Allocation Error\n");
+		free(line);
 		exit(EXIT_FAILURE);
 	}
 
@@ -32,6 +34,7 @@ char **split_line(char *line)
 			if (!tokens)
 			{
 				fprintf(stderr, "Allocation Error");
+				free(line);
 				exit(EXIT_FAILURE);
 			}
 		}
