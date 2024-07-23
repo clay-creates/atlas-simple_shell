@@ -4,9 +4,10 @@
  * handle_exit - Handles the exit command
  * @args: The arguments for the command
  */
+
 void handle_exit(char **args)
 {
-	if (args)
+	if (args) /* Ensure memory freed on exit */
 	{
 		free(args);
 		args = NULL;
@@ -18,16 +19,17 @@ void handle_exit(char **args)
  * handle_env - Handles the env command
  * @args: The arguments for the command
  */
+
 void handle_env(char **args)
 {
-	int i;
+	int i; /* Iteration var */
 
-	for (i = 0; environ[i] != NULL; i++)
+	for (i = 0; environ[i] != NULL; i++) /* For each env in environ print environ */
 	{
 		printf("%s\n", environ[i]);
 	}
 
-	if (args)
+	if (args) /* Ensure args memory is freed */
 	{
 		free(args);
 		args = NULL;
