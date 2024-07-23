@@ -6,78 +6,67 @@
 
 void shell_loop(void)
 {
-	/**
+	/*
 	 * Params:
 	 * *line: A character pointer to hold the user entry line after using read_ling method
 	 * **args: A character pointer to hold the tokenized line after using split_line method
 	 * status: Holds a default status code for error handling
-	 *
-	 * A Do / While loop is created to be the main loop of the console
-	 * Methods are called incrementally down the loop:
-	 * 1. The user is prompted for input.
-	 * 2. Store the user input line in the line var using read_line.
-	 * 3. If the input is null, check if the input is from a terminal, print a newline, and exit.
-	 * 4. The input line is tokenized and stored in the args array using split_line.
-	 * 5. If the first token is null, free the allocated memory for line and args and continue the loop.
-	 * 6. If the command is "exit", handle the exit process.
-	 * 7. If the command is "env", handle displaying the environment variables.
-	 * 8. For any other command, execute it and store the status.
-	 * 9. Free the allocated memory for line and args before the next iteration.
 	 */
+
 	char *line;
 	char **args;
 	int status = 1;
 
-	do
+	do /* A Do / While loop is created to be the main loop of the console. */
 	{
-		prompt();
-		line = read_line();
-		if (line == NULL)
+		prompt();			/* The user is prompted for input via prompt method */
+		line = read_line(); /* Stores user input via read_line to the line var */
+		if (line == NULL)	/* Check if the user gave input */
 		{
 			if (isatty(STDIN_FILENO))
 			{
-				printf("\n");
+				printf("\n"); /* Print newline if no input passed */
 			}
 			exit(0);
 		}
-		args = split_line(line);
-		if (args[0] == NULL)
+		args = split_line(line); /* Store tokenized input (via split_line) in the args var */
+		if (args[0] == NULL)	 /* Null check for args */
 		{
-			free(line);
+			free(line); /* Free memory */
 			free(args);
 			continue;
 		}
-		if (_strcmp(args[0], "exit") == 0)
+		if (_strcmp(args[0], "exit") == 0) /* Check if user enters "exit" */
 		{
-			free(line);
-			handle_exit(args);
+			free(line);		   /* Free memory */
+			handle_exit(args); /* Exit Shell via handle_exit */
 		}
-		else if (_strcmp(args[0], "env") == 0)
+		else if (_strcmp(args[0], "env") == 0) /* Check if user enters "env" */
 		{
-			handle_env(args);
-			free(line);
+			handle_env(args); /* Prints current ENV via handle_env */
+			free(line);		  /* Free memory */
 			free(args);
 		}
-		else if (_strcmp(args[0], "man") == 0)
+		else if (_strcmp(args[0], "man") == 0) /* Check if user enters "man" */
 		{
-			handle_man();
-			free(line);
+			handle_man(); /* Brings up the man page via handle_man */
+			free(line);	  /* Free memory */
 			free(args);
 		}
 		else
 		{
-			status = execute(args);
-			free(line);
+			status = execute(args); /* Execute user input via execute method */
+			free(line);				/* Free memory after execution */
 			free(args);
 		}
-	} while (status);
+	} while (status); /* While status var is not null, do / while loop persists */
 
-	if (line)
+	if (line) /* Doublecheck that line memory is freed */
 	{
 		free(line);
 		line = NULL;
 	}
-	if (args)
+	if (args) /* Doublecheck that args memory is freed */
 	{
 		free(args);
 		args = NULL;
