@@ -6,7 +6,11 @@
  */
 void handle_exit(char **args)
 {
-	(void)args;
+	if (args)
+	{
+		free(args);
+		args = NULL;
+	}
 	exit(0);
 }
 
@@ -18,9 +22,14 @@ void handle_env(char **args)
 {
 	int i;
 
-	(void)args;
 	for (i = 0; environ[i] != NULL; i++)
 	{
 		printf("%s\n", environ[i]);
+	}
+
+	if (args)
+	{
+		free(args);
+		args = NULL;
 	}
 }

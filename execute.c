@@ -12,7 +12,7 @@ int execute(char **args)
 	int status;
 
 	if (args[0] == NULL)
-		return 1;
+		return (1);
 
 	pid = fork();
 	if (pid == 0)
@@ -35,5 +35,5 @@ int execute(char **args)
 		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
 
-	return 1;
+	return (1);
 }

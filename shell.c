@@ -26,7 +26,7 @@ void shell_loop(void)
 	 */
 	char *line;
 	char **args;
-	int status = -1;
+	int status = 1;
 
 	do
 	{
@@ -50,7 +50,6 @@ void shell_loop(void)
 		if (_strcmp(args[0], "exit") == 0)
 		{
 			free(line);
-			free(args);
 			handle_exit(args);
 		}
 		else if (_strcmp(args[0], "env") == 0)
@@ -66,4 +65,15 @@ void shell_loop(void)
 			free(args);
 		}
 	} while (status);
+
+	if (line)
+	{
+		free(line);
+		line = NULL;
+	}
+	if (args)
+	{
+		free(args);
+		args = NULL;
+	}
 }
