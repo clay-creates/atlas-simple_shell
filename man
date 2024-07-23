@@ -1,0 +1,40 @@
+Simple Shell Manual
+=================
+
+NAME
+    hsh - simple shell program
+
+SYNOPSIS
+    ./hsh
+
+DESCRIPTION
+    The hsh program is a simple Unix shell implemented in C.
+    It reads user input, tokenizes it, and executes commands
+    by forking a new process.
+
+COMMANDS
+    exit
+        Exit the shell.
+
+    env
+        Display the environment variables.
+
+    help
+        Display this help message.
+
+USAGE
+    Run the program by typing:
+        ./hsh
+
+EXAMPLES
+    ($) ls -l
+    total 32
+    -rwxrwxr-x 1 user user 16944 Jul 22 12:34 hsh
+    -rw-rw-r-- 1 user user  1340 Jul 22 12:30 main.c
+    -rw-rw-r-- 1 user user  1178 Jul 22 12:29 shell.c
+    -rw-rw-r-- 1 user user   962 Jul 22 12:28 split_line.c
+    ...
+    ($) exit
+
+AUTHOR
+    Written by Clay Jones.

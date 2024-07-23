@@ -58,6 +58,12 @@ void shell_loop(void)
 			free(line);
 			free(args);
 		}
+		else if (_strcmp(args[0], "man") == 0)
+		{
+			handle_man();
+			free(line);
+			free(args);
+		}
 		else
 		{
 			status = execute(args);
