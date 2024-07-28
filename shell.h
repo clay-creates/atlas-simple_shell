@@ -17,7 +17,7 @@ char *read_line(void);
 char **split_line(char *line);
 int execute(char **args);
 void shell_loop(void);
-void handle_exit(char **args);
+void handle_exit(char **args, int last_status);
 void handle_env(char **args);
 void handle_man(void);
 int _strcmp(const char *s1, const char *s2);

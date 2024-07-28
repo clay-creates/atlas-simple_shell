@@ -8,7 +8,7 @@ void shell_loop(void)
 {
 	/*
 	 * Params:
-	 * *line: A character pointer to hold the user entry line after using read_ling method
+	 * *line: A character pointer to hold the user entry line after using read_line method
 	 * **args: A character pointer to hold the tokenized line after using split_line method
 	 * status: Holds a default status code for error handling
 	 */
@@ -16,6 +16,7 @@ void shell_loop(void)
 	char *line;
 	char **args;
 	int status = 1;
+	int last_status = 0;
 
 	do /* A Do / While loop is created to be the main loop of the console. */
 	{
@@ -27,7 +28,7 @@ void shell_loop(void)
 			{
 				printf("\n"); /* Print newline if no input passed */
 			}
-			exit(0);
+			exit(last_status);
 		}
 		args = split_line(line); /* Store tokenized input (via split_line) in the args var */
 		if (args[0] == NULL)	 /* Null check for args */
@@ -38,8 +39,8 @@ void shell_loop(void)
 		}
 		if (_strcmp(args[0], "exit") == 0) /* Check if user enters "exit" */
 		{
-			free(line);		   /* Free memory */
-			handle_exit(args); /* Exit Shell via handle_exit */
+			free(line);						/* Free memory */
+			handle_exit(args, last_status); /* Exit Shell via handle_exit */
 		}
 		else if (_strcmp(args[0], "env") == 0) /* Check if user enters "env" */
 		{
@@ -55,8 +56,8 @@ void shell_loop(void)
 		}
 		else
 		{
-			status = execute(args); /* Execute user input via execute method */
-			free(line);				/* Free memory after execution */
+			last_status = execute(args); /* Execute user input via execute method */
+			free(line);					 /* Free memory after execution */
 			free(args);
 		}
 	} while (status); /* While status var is not null, do / while loop persists */
