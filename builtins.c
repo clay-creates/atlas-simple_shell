@@ -5,14 +5,14 @@
  * @args: The arguments for the command
  */
 
-void handle_exit(char **args)
+void handle_exit(char **args, int last_status)
 {
 	if (args) /* Ensure memory freed on exit */
 	{
 		free(args);
 		args = NULL;
 	}
-	exit(0);
+	exit(last_status);
 }
 
 /**
